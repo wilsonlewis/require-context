@@ -1,0 +1,23 @@
+{
+  "name": "require-context",
+  "version": "0.0.1",
+  "description": "Require with an expression.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilsonlewis/require-context.git"
+  },
+  "keywords": ["node", "require", "context", "modules"],
+  "author": "Wilson Lewis <wilsonlewis@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wilsonlewis/require-context/issues"
+  },
+  "homepage": "https://github.com/wilsonlewis/require-context#readme",
+  "peerDependencies": {
+    "node-dir": "0.x"
+  }
+}
