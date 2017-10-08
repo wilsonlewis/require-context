@@ -17,7 +17,7 @@
     "url": "https://github.com/wilsonlewis/require-context/issues"
   },
   "homepage": "https://github.com/wilsonlewis/require-context#readme",
-  "peerDependencies": {
-    "node-dir": "0.x"
+  "dependencies": {
+    "node-dir": "^0.1.17"
   }
 }
