@@ -2,10 +2,23 @@ module.exports = function(directory, recursive, regExp) {
   const dir = require('node-dir')
   const path = require('path')
 
-  const basepath =
+  let basepath =
     directory[0] === '.'
       ? path.resolve(__dirname + path.sep + directory)
       : directory
+
+  try {
+    basepath = require.resolve(basepath)
+  } catch (err) {
+    if (
+      err.message.length > 18 &&
+      err.message.slice(0, 18) === 'Cannot find module'
+    ) {
+      basepath = err.message.slice(20, -1)
+    } else {
+      throw err
+    }
+  }
 
   const keys = dir
     .files(basepath, {
@@ -16,7 +29,7 @@ module.exports = function(directory, recursive, regExp) {
       return file.match(regExp || /\.(json|js)$/)
     })
     .map(function(file) {
-      return file.slice(basepath.length + 1)
+      return '.' + path.sep + file.slice(basepath.length + 1)
     })
 
   const context = function(key) {
