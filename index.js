@@ -13,7 +13,7 @@ module.exports = function(directory, recursive, regExp) {
       recursive: recursive || false
     })
     .filter(function(file) {
-      return file.match(regExp || /\.js$/)
+      return file.match(regExp || /\.(json|js)$/)
     })
     .map(function(file) {
       return file.slice(basepath.length + 1)
@@ -32,13 +32,4 @@ module.exports = function(directory, recursive, regExp) {
   }
 
   return context
-}
-
-module.exports.register = function() {
-  const wrap = module.constructor.wrap
-  module.constructor.wrap = function(script) {
-    return wrap(
-      'require.context = ' + module.exports.toString() + '\n' + script
-    )
-  }
 }
