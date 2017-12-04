@@ -10,12 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/wilsonlewis/require-context.git"
   },
-  "keywords": [
-    "node",
-    "require",
-    "context",
-    "modules"
-  ],
+  "keywords": ["node", "require", "context", "modules", "webpack"],
   "author": "Wilson Lewis <wilsonlewis@gmail.com>",
   "license": "MIT",
   "bugs": {
