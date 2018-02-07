@@ -2,7 +2,7 @@ module.exports = function(directory, recursive, regExp) {
   const dir = require('node-dir')
   const path = require('path')
 
-  let basepath =
+  var basepath =
     directory[0] === '.'
       ? path.resolve(__dirname + path.sep + directory)
       : directory
