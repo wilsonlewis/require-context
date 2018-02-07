@@ -1,6 +1,6 @@
 {
   "name": "require-context",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Require with an expression.",
   "main": "index.js",
   "scripts": {

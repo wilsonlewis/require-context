@@ -1,6 +1,6 @@
 module.exports = function(directory, recursive, regExp) {
-  const dir = require('node-dir')
-  const path = require('path')
+  var dir = require('node-dir')
+  var path = require('path')
 
   var basepath =
     directory[0] === '.'
@@ -20,7 +20,7 @@ module.exports = function(directory, recursive, regExp) {
     }
   }
 
-  const keys = dir
+  var keys = dir
     .files(basepath, {
       sync: true,
       recursive: recursive || false
@@ -32,7 +32,7 @@ module.exports = function(directory, recursive, regExp) {
       return '.' + path.sep + file.slice(basepath.length + 1)
     })
 
-  const context = function(key) {
+  var context = function(key) {
     return require(context.resolve(key))
   }
 
