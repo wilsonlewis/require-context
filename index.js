@@ -1,9 +1,7 @@
 module.exports = function(directory, recursive, regExp) {
-  var fs = require('fs')
   var dir = require('node-dir')
   var path = require('path')
 
-  var useRequireResolve = false
   // Assume absolute path by default
   var basepath = directory
 
@@ -13,11 +11,6 @@ module.exports = function(directory, recursive, regExp) {
   } else if (!path.isAbsolute(directory)) {
     // Module path
     basepath = require.resolve(directory)
-    useRequireResolve = true
-  }
-
-  if (!useRequireResolve) {
-    fs.accessSync(basepath, fs.F_OK);
   }
 
   var keys = dir
