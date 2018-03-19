@@ -1,23 +1,23 @@
 module.exports = function(directory, recursive, regExp) {
+  var fs = require('fs')
   var dir = require('node-dir')
   var path = require('path')
 
-  var basepath =
-    directory[0] === '.'
-      ? path.resolve(__dirname + path.sep + directory)
-      : directory
+  var useRequireResolve = false
+  // Assume absolute path by default
+  var basepath = directory
 
-  try {
-    basepath = require.resolve(basepath)
-  } catch (err) {
-    if (
-      err.message.length > 18 &&
-      err.message.slice(0, 18) === 'Cannot find module'
-    ) {
-      basepath = err.message.slice(20, -1)
-    } else {
-      throw err
-    }
+  if (directory[0] === '.') {
+    // Relative path
+    basepath = path.join(__dirname, directory)
+  } else if (!path.isAbsolute(directory)) {
+    // Module path
+    basepath = require.resolve(directory)
+    useRequireResolve = true
+  }
+
+  if (!useRequireResolve) {
+    fs.accessSync(basepath, fs.F_OK);
   }
 
   var keys = dir
@@ -29,7 +29,7 @@ module.exports = function(directory, recursive, regExp) {
       return file.match(regExp || /\.(json|js)$/)
     })
     .map(function(file) {
-      return '.' + path.sep + file.slice(basepath.length + 1)
+      return path.join('.', file.slice(basepath.length + 1))
     })
 
   var context = function(key) {
@@ -37,7 +37,7 @@ module.exports = function(directory, recursive, regExp) {
   }
 
   context.resolve = function(key) {
-    return directory + path.sep + key
+    return path.join(directory, key)
   }
 
   context.keys = function() {
