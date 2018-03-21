@@ -1,4 +1,4 @@
-# require-context v1.0.4
+# require-context v1.1.0
 
 ## Installation
 
