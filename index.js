@@ -30,7 +30,7 @@ module.exports = function(directory, recursive, regExp) {
   }
 
   context.resolve = function(key) {
-    return path.join(directory, key)
+    return path.join(basepath, key)
   }
 
   context.keys = function() {
