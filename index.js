@@ -2,12 +2,37 @@ module.exports = function(directory, recursive, regExp) {
   var dir = require('node-dir')
   var path = require('path')
 
+  function getCallerFile() {
+    var originalFunc = Error.prepareStackTrace
+
+    var callerFile, currentFile
+    try {
+      var err = new Error()
+
+      Error.prepareStackTrace = function prepareStackTrace(e, stack) {
+        return stack
+      }
+
+      currentFile = err.stack.shift().getFileName()
+
+      while (err.stack.length) {
+        callerFile = err.stack.shift().getFileName()
+
+        if (currentFile !== callerFile) break
+      }
+    } catch (e) { }
+
+    Error.prepareStackTrace = originalFunc
+
+    return path.dirname(callerFile)
+  }
+  
   // Assume absolute path by default
   var basepath = directory
 
   if (directory[0] === '.') {
     // Relative path
-    basepath = path.join(__dirname, directory)
+    basepath = path.join(getCallerFile(), directory)
   } else if (!path.isAbsolute(directory)) {
     // Module path
     basepath = require.resolve(directory)
