@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/wilsonlewis/require-context#readme",
   "dependencies": {
-    "node-dir": "^0.1.17"
+    "node-dir": "fshost/node-dir#master"
   }
 }
